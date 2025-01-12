@@ -1,8 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Badge } from "lucide-react";
 import ProductCard from "./ProductCard";
+import { client } from "@/sanity/lib/client";
 
 const products = [
   {
@@ -24,7 +23,11 @@ const products = [
     imageUrl: "/keyboard.png",
   },
 ];
-const ProductSection = () => {
+const ProductSection = async () => {
+  const query = await client.fetch(`*[_type == "product"]`);
+
+  console.log(query);
+
   return (
     <div className="max-w-7xl mx-auto h-full flex flex-col items-center justify-center py-32">
       <div className="w-full flex items-center justify-between lg:p-0 p-4">
